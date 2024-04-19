@@ -4,7 +4,6 @@
  */
 
 #include "../noiseGenerators/bridsonAlgorithm.hpp"
-#include "../loggers/Log.hpp"
 #include "../util/RandomNumberGenerator.hpp"
 
 constexpr int maxAttempts = 1000;

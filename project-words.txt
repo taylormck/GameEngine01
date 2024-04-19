@@ -1,2 +1,5 @@
 xmake
+sfml
+spdlog
+Bridson
 

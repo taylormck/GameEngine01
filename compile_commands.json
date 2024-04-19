@@ -1,0 +1,6 @@
+[
+{
+  "directory": "/home/grey/code/sfml-game",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-g", "-O0", "-std=c++23", "-DSFML_STATIC", "-I", "/home/grey/.xmake/packages/s/sfml/2.6.0/da0298c0322f40df9c1cfcb939dcb3f8/include", "-I", "/usr/include/freetype2", "-I", "/usr/include/libpng16", "-I", "/usr/include/X11/dri", "-I", "/home/grey/.xmake/packages/e/eudev/3.2.9/022b93ec842a4cf88191a6c56aff29ab/include", "-I", "/usr/include/AL", "-I", "/home/grey/.xmake/packages/s/spdlog/v1.13.0/cca5b628022e49229205fe5617e4245e/include", "-o", "build/.objs/game/linux/x86_64/debug/src/main.cpp.o", "src/main.cpp"],
+  "file": "src/main.cpp"
+}]

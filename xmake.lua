@@ -1,12 +1,16 @@
 add_rules("mode.debug", "mode.release")
 
 add_requires("sfml")
+add_requires("spdlog")
 
-target("hello")
+target("game")
 do
+	set_languages("c++23")
 	set_kind("binary")
-	add_files("src/*.cpp")
+	add_includedirs("src")
+	add_files("src/**.cpp")
 	add_packages("sfml")
+	add_packages("spdlog")
 end
 
 --

@@ -3,18 +3,32 @@
  */
 
 #include "./Log.hpp"
-#include <memory>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 namespace Engine {
-std::shared_ptr<spdlog::logger> Logger::GetCoreLogger() {
-	static std::shared_ptr<spdlog::logger> coreLogger = spdlog::stdout_color_mt("Engine Core");
+
+Logger::Logger(std::string name) : _logger(spdlog::stdout_color_mt(name)) {}
+
+Logger::~Logger() {}
+
+void Logger::trace(const char *msg...) { _logger->trace(msg); }
+
+void Logger::info(const char *msg...) { _logger->info(msg); }
+
+void Logger::warn(const char *msg...) { _logger->warn(msg); }
+
+void Logger::error(const char *msg...) { _logger->error(msg); }
+
+void Logger::critical(const char *msg...) { _logger->critical(msg); }
+
+Logger &Logger::GetCoreLogger() {
+	static Logger coreLogger = Logger("Engine Core");
 
 	return coreLogger;
 }
 
-std::shared_ptr<spdlog::logger> Logger::GetAppLogger() {
-	static std::shared_ptr<spdlog::logger> appLogger = spdlog::stdout_color_mt("Application");
+Logger &Logger::GetAppLogger() {
+	static Logger appLogger = Logger("Application");
 
 	return appLogger;
 }

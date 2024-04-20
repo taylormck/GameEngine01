@@ -10,9 +10,21 @@
 
 namespace Engine {
 class Logger {
+private:
+	std::shared_ptr<spdlog::logger> _logger;
+
+	Logger(std::string name);
+	~Logger();
+
 public:
-	static std::shared_ptr<spdlog::logger> GetCoreLogger();
-	static std::shared_ptr<spdlog::logger> GetAppLogger();
+	void trace(const char *msg...);
+	void info(const char *msg...);
+	void warn(const char *msg...);
+	void error(const char *msg...);
+	void critical(const char *msg...);
+
+	static Logger &GetCoreLogger();
+	static Logger &GetAppLogger();
 
 }; // class Logger
 }; // namespace Engine
@@ -33,17 +45,17 @@ public:
 
 #else
 
-#define ENGINE_LOG_TRACE(...) ::Engine::Logger::GetCoreLogger()->trace(__VA_ARGS__)
-#define ENGINE_LOG_INFO(...) ::Engine::Logger::GetCoreLogger()->info(__VA_ARGS__)
-#define ENGINE_LOG_WARN(...) ::Engine::Logger::GetCoreLogger()->warn(__VA_ARGS__)
-#define ENGINE_LOG_ERROR(...) ::Engine::Logger::GetCoreLogger()->error(__VA_ARGS__)
-#define ENGINE_LOG_CRITICAL(...) ::Engine::Logger::GetCoreLogger()->critical(__VA_ARGS__)
+#define ENGINE_LOG_TRACE(...) ::Engine::Logger::GetCoreLogger().trace(__VA_ARGS__)
+#define ENGINE_LOG_INFO(...) ::Engine::Logger::GetCoreLogger().info(__VA_ARGS__)
+#define ENGINE_LOG_WARN(...) ::Engine::Logger::GetCoreLogger().warn(__VA_ARGS__)
+#define ENGINE_LOG_ERROR(...) ::Engine::Logger::GetCoreLogger().error(__VA_ARGS__)
+#define ENGINE_LOG_CRITICAL(...) ::Engine::Logger::GetCoreLogger().critical(__VA_ARGS__)
 
-#define APP_LOG_TRACE(...) ::Engine::Logger::GetAppLogger()->trace(__VA_ARGS__)
-#define APP_LOG_INFO(...) ::Engine::Logger::GetAppLogger()->info(__VA_ARGS__)
-#define APP_LOG_WARN(...) ::Engine::Logger::GetAppLogger()->warn(__VA_ARGS__)
-#define APP_LOG_ERROR(...) ::Engine::Logger::GetAppLogger()->error(__VA_ARGS__)
-#define APP_LOG_CRITICAL(...) ::Engine::Logger::GetAppLogger()->critical(__VA_ARGS__)
+#define APP_LOG_TRACE(...) ::Engine::Logger::GetAppLogger().trace(__VA_ARGS__)
+#define APP_LOG_INFO(...) ::Engine::Logger::GetAppLogger().info(__VA_ARGS__)
+#define APP_LOG_WARN(...) ::Engine::Logger::GetAppLogger().warn(__VA_ARGS__)
+#define APP_LOG_ERROR(...) ::Engine::Logger::GetAppLogger().error(__VA_ARGS__)
+#define APP_LOG_CRITICAL(...) ::Engine::Logger::GetAppLogger().critical(__VA_ARGS__)
 
 #endif // DISABLE_LOGGING
 

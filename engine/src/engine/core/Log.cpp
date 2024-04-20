@@ -12,4 +12,10 @@ std::shared_ptr<spdlog::logger> Logger::GetCoreLogger() {
 
 	return coreLogger;
 }
+
+std::shared_ptr<spdlog::logger> Logger::GetAppLogger() {
+	static std::shared_ptr<spdlog::logger> appLogger = spdlog::stdout_color_mt("Application");
+
+	return appLogger;
+}
 }; // namespace Engine

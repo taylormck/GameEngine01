@@ -3,8 +3,8 @@
  *
  */
 
-#include "../noiseGenerators/bridsonAlgorithm.hpp"
-#include "../util/RandomNumberGenerator.hpp"
+#include "./bridsonAlgorithm.hpp"
+#include "./RandomNumberGenerator.hpp"
 
 constexpr int maxAttempts = 1000;
 

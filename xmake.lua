@@ -3,13 +3,27 @@ add_rules("mode.debug", "mode.release")
 add_requires("sfml")
 add_requires("spdlog")
 
-target("game")
+target("engine")
+do
+	set_languages("c++23")
+	set_kind("static")
+	add_includedirs("engine/src")
+	add_files("engine/src/**.cpp")
+	add_packages("sfml")
+	add_packages("spdlog")
+end
+
+target("sandbox")
 do
 	set_languages("c++23")
 	set_kind("binary")
-	add_includedirs("src")
-	add_files("src/**.cpp")
-	add_packages("sfml")
+	add_includedirs("sandbox/src")
+	add_includedirs("engine/src")
+	add_files("sandbox/src/**.cpp")
+	add_deps("engine")
+
+	-- TODO I'd like to make it so that the application doesn't
+	-- need to require these packages directly.
 	add_packages("spdlog")
 end
 

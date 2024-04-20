@@ -6,7 +6,13 @@
 #define ENGINE_LOGGER_HPP
 
 #include <memory>
-#include <spdlog/sinks/stdout_color_sinks.h>
+
+// Forward declaration of our logger class.
+// Using a forward declaration allows us to avoid requiring the client
+// to link the spdlog library.
+namespace spdlog {
+class logger;
+};
 
 namespace Engine {
 class Logger {

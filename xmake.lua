@@ -1,4 +1,5 @@
 add_rules("mode.debug", "mode.release")
+add_rules("plugin.compile_commands.autoupdate")
 
 add_requires("sfml")
 add_requires("spdlog")
@@ -21,10 +22,6 @@ do
 	add_includedirs("engine/src")
 	add_files("sandbox/src/**.cpp")
 	add_deps("engine")
-
-	-- TODO I'd like to make it so that the application doesn't
-	-- need to require these packages directly.
-	add_packages("spdlog")
 end
 
 --

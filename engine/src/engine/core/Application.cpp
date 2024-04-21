@@ -1,5 +1,10 @@
+/**
+ * @file Implementation of the Engine::Application class
+ */
+
 #include "Application.hpp"
 #include "Log.hpp"
+#include "engine/events/Event.hpp"
 #include <SFML/Graphics.hpp>
 
 // TODO read these from a config/data file of some sort
@@ -14,6 +19,7 @@ Application::~Application() {}
 void Application::Run() {
 	ENGINE_LOG_INFO("Running application");
 	ENGINE_LOG_INFO("Creating window with size {}x{}", screenWidth, screenHeight);
+
 	sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "SFML window");
 
 	window.setVerticalSyncEnabled(true);
@@ -27,11 +33,20 @@ void Application::Run() {
 		sf::Time delta = clock.restart();
 		sf::Event event;
 
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed ||
-				sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-				window.close();
+		while (window.pollEvent(event) && !_shouldClose) {
+			Event engineEvent = Event(event);
+
+			// Ignore unsupported events
+			if (engineEvent.Type() != EventType::None) {
+				ENGINE_LOG_INFO("Event: {}", engineEvent.Type());
+				HandleEvent(engineEvent);
 			}
+		}
+
+		// Break out of the loop if the window is closed
+		if (_shouldClose) {
+			window.close();
+			break;
 		}
 
 		Update(delta.asSeconds());
@@ -43,5 +58,7 @@ void Application::Run() {
 		window.display();
 	}
 }
+
+void Application::Close() { _shouldClose = true; }
 
 } // namespace Engine

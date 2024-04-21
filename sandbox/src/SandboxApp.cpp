@@ -7,8 +7,19 @@ public:
 	~Sandbox() {}
 
 	void Init() override {
-		// TODO initialize stuff
 		APP_LOG_INFO("Initializing application");
+
+		// TODO initialize stuff
+	}
+
+	void HandleEvent(Engine::Event &event) override {
+		switch (event.Type()) {
+		case Engine::EventType::WindowClose:
+			Close();
+			break;
+		default:
+			// TODO handle missing event types
+		}
 	}
 
 	void Update(float delta) override {

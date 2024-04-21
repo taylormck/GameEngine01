@@ -4,3 +4,4 @@
 #include <engine/core/EntryPoint.hpp>
 
 #include <engine/core/Log.hpp>
+#include <engine/events/Event.hpp>

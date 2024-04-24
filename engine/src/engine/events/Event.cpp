@@ -5,6 +5,8 @@
 #include "Event.hpp"
 #include <SFML/Window/Event.hpp>
 
+#include <format>
+
 namespace Engine {
 
 Event::Event(sf::Event &event) {
@@ -27,5 +29,18 @@ Event::Event(sf::Event &event) {
 }
 
 EventType Event::Type() const { return _type; }
+
+std::string Event::toString() const {
+	switch (_type) {
+	case EventType::WindowClose:
+		return "WindowClose";
+	case EventType::KeyPressed:
+		return "KeyPressed";
+	case EventType::KeyReleased:
+		return "KeyReleased";
+	default:
+		return std::format("Unsupported Event");
+	}
+}
 
 } // namespace Engine

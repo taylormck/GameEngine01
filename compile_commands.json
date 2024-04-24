@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/grey/code/sfml-game",
-  "arguments": ["/usr/bin/clang-18", "-c", "-Qunused-arguments", "-m64", "-g", "-O0", "-std=c++23", "-Isandbox/src", "-Iengine/src", "-o", "build/.objs/sandbox/linux/x86_64/debug/sandbox/src/SandboxApp.cpp.o", "sandbox/src/SandboxApp.cpp"],
+  "arguments": ["/usr/bin/clang-18", "-c", "-Qunused-arguments", "-m64", "-g", "-O0", "-std=c++23", "-Isandbox/src", "-Iengine/src", "-I", "/home/grey/.xmake/packages/s/spdlog/v1.13.0/6728063acf864ebb9bd8f22df3ab71a3/include", "-o", "build/.objs/sandbox/linux/x86_64/debug/sandbox/src/SandboxApp.cpp.o", "sandbox/src/SandboxApp.cpp"],
   "file": "sandbox/src/SandboxApp.cpp"
 },
 {
@@ -18,11 +18,6 @@
   "directory": "/home/grey/code/sfml-game",
   "arguments": ["/usr/bin/clang-18", "-c", "-Qunused-arguments", "-m64", "-g", "-O0", "-std=c++23", "-Iengine/src", "-DSFML_STATIC", "-I", "/home/grey/.xmake/packages/s/sfml/2.6.0/1867160eb58144b8b153e90862d2359b/include", "-I", "/usr/include/freetype2", "-I", "/usr/include/libpng16", "-I", "/usr/include/X11/dri", "-I", "/home/grey/.xmake/packages/e/eudev/3.2.9/50c5be8eaf9d475c95f81390b329b7e4/include", "-I", "/usr/include/AL", "-I", "/home/grey/.xmake/packages/s/spdlog/v1.13.0/6728063acf864ebb9bd8f22df3ab71a3/include", "-o", "build/.objs/engine/linux/x86_64/debug/engine/src/engine/core/EntryPoint.cpp.o", "engine/src/engine/core/EntryPoint.cpp"],
   "file": "engine/src/engine/core/EntryPoint.cpp"
-},
-{
-  "directory": "/home/grey/code/sfml-game",
-  "arguments": ["/usr/bin/clang-18", "-c", "-Qunused-arguments", "-m64", "-g", "-O0", "-std=c++23", "-Iengine/src", "-DSFML_STATIC", "-I", "/home/grey/.xmake/packages/s/sfml/2.6.0/1867160eb58144b8b153e90862d2359b/include", "-I", "/usr/include/freetype2", "-I", "/usr/include/libpng16", "-I", "/usr/include/X11/dri", "-I", "/home/grey/.xmake/packages/e/eudev/3.2.9/50c5be8eaf9d475c95f81390b329b7e4/include", "-I", "/usr/include/AL", "-I", "/home/grey/.xmake/packages/s/spdlog/v1.13.0/6728063acf864ebb9bd8f22df3ab71a3/include", "-o", "build/.objs/engine/linux/x86_64/debug/engine/src/engine/core/Log.cpp.o", "engine/src/engine/core/Log.cpp"],
-  "file": "engine/src/engine/core/Log.cpp"
 },
 {
   "directory": "/home/grey/code/sfml-game",

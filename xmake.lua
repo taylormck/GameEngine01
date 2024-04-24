@@ -22,6 +22,9 @@ do
 	add_includedirs("engine/src")
 	add_files("sandbox/src/**.cpp")
 	add_deps("engine")
+
+	-- TODO would like to make this unnecessary
+	add_packages("spdlog")
 end
 
 --

@@ -17,6 +17,11 @@ public:
 		case Engine::EventType::WindowClose:
 			Close();
 			break;
+		/* case Engine::EventType::KeyPressed: */
+		/* 	if (Engine::Input::IsKeyPressed(Engine::Key::Escape)) { */
+		/* 		Close(); */
+		/* 	} */
+		/* 	break; */
 		default:
 			// TODO handle missing event types
 		}

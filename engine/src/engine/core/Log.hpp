@@ -6,31 +6,34 @@
 #define ENGINE_LOGGER_HPP
 
 #include <memory>
-
-// Forward declaration of our logger class.
-// Using a forward declaration allows us to avoid requiring the client
-// to link the spdlog library.
-namespace spdlog {
-class logger;
-};
+#include <spdlog/sinks/stdout_color_sinks.h>
+#include <utility>
 
 namespace Engine {
-class Logger {
+class Log {
 private:
 	std::shared_ptr<spdlog::logger> _logger;
 
-	Logger(std::string name);
-	~Logger();
+	Log(std::string name) : _logger(spdlog::stdout_color_mt(name)) {}
+
+	~Log() = default;
 
 public:
-	void trace(const char *msg...);
-	void info(const char *msg...);
-	void warn(const char *msg...);
-	void error(const char *msg...);
-	void critical(const char *msg...);
+	template <typename... Args> void Info(fmt::format_string<Args...> fmt, Args &&...args) {
+		_logger->info(fmt, std::forward<Args>(args)...);
+	}
 
-	static Logger &GetCoreLogger();
-	static Logger &GetAppLogger();
+	static Log &GetCoreLogger() {
+		static Log coreLogger = Log("Engine Core");
+
+		return coreLogger;
+	}
+
+	static Log &GetAppLogger() {
+		static Log appLogger = Log("Application");
+
+		return appLogger;
+	}
 
 }; // class Logger
 }; // namespace Engine
@@ -51,17 +54,17 @@ public:
 
 #else
 
-#define ENGINE_LOG_TRACE(...) ::Engine::Logger::GetCoreLogger().trace(__VA_ARGS__)
-#define ENGINE_LOG_INFO(...) ::Engine::Logger::GetCoreLogger().info(__VA_ARGS__)
-#define ENGINE_LOG_WARN(...) ::Engine::Logger::GetCoreLogger().warn(__VA_ARGS__)
-#define ENGINE_LOG_ERROR(...) ::Engine::Logger::GetCoreLogger().error(__VA_ARGS__)
-#define ENGINE_LOG_CRITICAL(...) ::Engine::Logger::GetCoreLogger().critical(__VA_ARGS__)
+#define ENGINE_LOG_TRACE(...) ::Engine::Log::GetCoreLogger().Trace(__VA_ARGS__)
+#define ENGINE_LOG_INFO(...) ::Engine::Log::GetCoreLogger().Info(__VA_ARGS__)
+#define ENGINE_LOG_WARN(...) ::Engine::Log::GetCoreLogger().Warn(__VA_ARGS__)
+#define ENGINE_LOG_ERROR(...) ::Engine::Log::GetCoreLogger().Error(__VA_ARGS__)
+#define ENGINE_LOG_CRITICAL(...) ::Engine::Log::GetCoreLogger().Critical(__VA_ARGS__)
 
-#define APP_LOG_TRACE(...) ::Engine::Logger::GetAppLogger().trace(__VA_ARGS__)
-#define APP_LOG_INFO(...) ::Engine::Logger::GetAppLogger().info(__VA_ARGS__)
-#define APP_LOG_WARN(...) ::Engine::Logger::GetAppLogger().warn(__VA_ARGS__)
-#define APP_LOG_ERROR(...) ::Engine::Logger::GetAppLogger().error(__VA_ARGS__)
-#define APP_LOG_CRITICAL(...) ::Engine::Logger::GetAppLogger().critical(__VA_ARGS__)
+#define APP_LOG_TRACE(...) ::Engine::Log::GetAppLogger().Trace(__VA_ARGS__)
+#define APP_LOG_INFO(...) ::Engine::Log::GetAppLogger().Info(__VA_ARGS__)
+#define APP_LOG_WARN(...) ::Engine::Log::GetAppLogger().Warn(__VA_ARGS__)
+#define APP_LOG_ERROR(...) ::Engine::Log::GetAppLogger().Error(__VA_ARGS__)
+#define APP_LOG_CRITICAL(...) ::Engine::Log::GetAppLogger().Critical(__VA_ARGS__)
 
 #endif // DISABLE_LOGGING
 

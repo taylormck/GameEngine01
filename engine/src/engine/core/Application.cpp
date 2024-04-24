@@ -38,7 +38,7 @@ void Application::Run() {
 
 			// Ignore unsupported events
 			if (engineEvent.Type() != EventType::None) {
-				ENGINE_LOG_INFO("Event: {}", engineEvent.Type());
+				ENGINE_LOG_INFO("Event: {}", engineEvent.toString());
 				HandleEvent(engineEvent);
 			}
 		}

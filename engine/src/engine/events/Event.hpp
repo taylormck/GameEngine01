@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace sf {
 class Event;
 }
@@ -40,5 +42,7 @@ public:
 	Event(sf::Event &event);
 
 	EventType Type() const;
+
+	std::string toString() const;
 };
 } // namespace Engine

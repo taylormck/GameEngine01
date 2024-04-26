@@ -1,6 +1,12 @@
 #include <Engine.hpp>
+#include <glm/glm.hpp>
+#include <memory>
+#include <vector>
 
 class Sandbox : public Engine::Application {
+private:
+	std::vector<Engine::GameObject> _gameObjects;
+
 public:
 	Sandbox() {}
 
@@ -9,7 +15,18 @@ public:
 	void Init() override {
 		APP_LOG_INFO("Initializing application");
 
-		// TODO initialize stuff
+		glm::vec3 circle_color(0.5f, 0.2f, 0.3f);
+
+		Engine::GameObject first_circle;
+		first_circle.AddComponent(std::make_shared<Engine::Body2D>(
+			glm::vec2(1.0f, 1.0f),
+			0.0f,
+			glm::vec2(1.0f, 1.0f),
+			glm::vec2(2.0f, 1.0f)
+		));
+		first_circle.AddComponent(std::make_shared<Engine::Circle>(5.0f, circle_color));
+
+		_gameObjects.push_back(first_circle);
 	}
 
 	void HandleEvent(Engine::Event &event) override {
@@ -28,13 +45,15 @@ public:
 	}
 
 	void Update(float delta) override {
-		// TODO do stuff
-		// TODO update all the things
+		for (auto gameObject : _gameObjects) {
+			gameObject.Update(delta);
+		}
 	}
 
-	void Draw() override {
-		// TODO do
-		// TODO draw all the things
+	void Draw(sf::RenderWindow &window) override {
+		for (const auto gameObject : _gameObjects) {
+			gameObject.Draw(window);
+		}
 	}
 };
 

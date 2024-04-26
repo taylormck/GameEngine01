@@ -3,6 +3,7 @@ add_rules("plugin.compile_commands.autoupdate")
 
 add_requires("sfml")
 add_requires("spdlog")
+add_requires("glm")
 
 target("engine")
 do
@@ -12,6 +13,7 @@ do
 	add_files("engine/src/**.cpp")
 	add_packages("sfml")
 	add_packages("spdlog")
+	add_packages("glm")
 end
 
 target("sandbox")
@@ -24,7 +26,9 @@ do
 	add_deps("engine")
 
 	-- TODO would like to make this unnecessary
+	add_packages("sfml")
 	add_packages("spdlog")
+	add_packages("glm")
 end
 
 --

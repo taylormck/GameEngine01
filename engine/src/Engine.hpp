@@ -6,3 +6,8 @@
 #include <engine/core/Log.hpp>
 #include <engine/events/Event.hpp>
 #include <engine/input/Input.hpp>
+
+#include <engine/components/Body2D.hpp>
+#include <engine/components/Circle.hpp>
+#include <engine/components/Component.hpp>
+#include <engine/gameObjects/GameObject.hpp>

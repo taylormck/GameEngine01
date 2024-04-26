@@ -53,7 +53,7 @@ void Application::Run() {
 
 		window.clear();
 
-		Draw();
+		Draw(window);
 
 		window.display();
 	}

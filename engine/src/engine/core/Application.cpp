@@ -4,7 +4,9 @@
 
 #include "Application.hpp"
 #include "Log.hpp"
+#include "engine/components/Transform2D.hpp"
 #include "engine/events/Event.hpp"
+#include "engine/systems/Draw.hpp"
 #include <SFML/Graphics.hpp>
 
 // TODO read these from a config/data file of some sort
@@ -59,6 +61,19 @@ void Application::Run() {
 	}
 }
 
+void Application::Draw(sf::RenderWindow &window) {
+	int numObjects = _transforms.size();
+
+	for (int i = 0; i < numObjects; i++) {
+		::Engine::Draw(window, _transforms[i], _circles[i]);
+	}
+}
+
 void Application::Close() { _shouldClose = true; }
+
+void Application::AddGameObject(Transform2D transform, Circle circle) {
+	_transforms.push_back(transform);
+	_circles.push_back(circle);
+}
 
 } // namespace Engine

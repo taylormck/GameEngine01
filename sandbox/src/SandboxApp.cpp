@@ -1,12 +1,7 @@
 #include <Engine.hpp>
 #include <glm/glm.hpp>
-#include <memory>
-#include <vector>
 
 class Sandbox : public Engine::Application {
-private:
-	std::vector<Engine::GameObject> _gameObjects;
-
 public:
 	Sandbox() {}
 
@@ -15,18 +10,12 @@ public:
 	void Init() override {
 		APP_LOG_INFO("Initializing application");
 
-		glm::vec3 circle_color(0.5f, 0.2f, 0.3f);
+		glm::u8vec3 circle_color(123, 25, 30);
 
-		Engine::GameObject first_circle;
-		first_circle.AddComponent(std::make_shared<Engine::Body2D>(
-			glm::vec2(1.0f, 1.0f),
-			0.0f,
-			glm::vec2(1.0f, 1.0f),
-			glm::vec2(2.0f, 1.0f)
-		));
-		first_circle.AddComponent(std::make_shared<Engine::Circle>(5.0f, circle_color));
-
-		_gameObjects.push_back(first_circle);
+		Application::AddGameObject(
+			Engine::Transform2D(glm::vec2(100.0f, 100.0f), 0.0f, glm::vec2(1.0f, 1.0f)),
+			Engine::Circle(50.0f, circle_color)
+		);
 	}
 
 	void HandleEvent(Engine::Event &event) override {
@@ -44,17 +33,9 @@ public:
 		}
 	}
 
-	void Update(float delta) override {
-		for (auto gameObject : _gameObjects) {
-			gameObject.Update(delta);
-		}
-	}
+	void Update(float delta) override {}
 
-	void Draw(sf::RenderWindow &window) override {
-		for (const auto gameObject : _gameObjects) {
-			gameObject.Draw(window);
-		}
-	}
+	/* void Draw(sf::RenderWindow &window) override {} */
 };
 
 Engine::Application *CreateApplication() { return new Sandbox(); }

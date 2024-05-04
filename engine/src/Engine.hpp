@@ -9,3 +9,4 @@
 
 #include <engine/components/Circle.hpp>
 #include <engine/components/Transform2D.hpp>
+#include <engine/components/Velocity.hpp>

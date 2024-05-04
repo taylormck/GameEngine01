@@ -5,8 +5,10 @@
 #include "Application.hpp"
 #include "Log.hpp"
 #include "engine/components/Transform2D.hpp"
+#include "engine/components/Velocity.hpp"
 #include "engine/events/Event.hpp"
 #include "engine/systems/Draw.hpp"
+#include "engine/systems/Move.hpp"
 #include <SFML/Graphics.hpp>
 
 // TODO read these from a config/data file of some sort
@@ -51,13 +53,23 @@ void Application::Run() {
 			break;
 		}
 
+		// Allow users to update the game objects before we run the systems
 		Update(delta.asSeconds());
+		ExecuteSystems(delta.asSeconds());
 
 		window.clear();
 
 		Draw(window);
 
 		window.display();
+	}
+}
+
+void Application::ExecuteSystems(float delta) {
+	int numObjects = _transforms.size();
+
+	for (int i = 0; i < numObjects; i++) {
+		::Engine::Move(_transforms[i], _velocities[i], delta);
 	}
 }
 
@@ -71,8 +83,9 @@ void Application::Draw(sf::RenderWindow &window) {
 
 void Application::Close() { _shouldClose = true; }
 
-void Application::AddGameObject(Transform2D transform, Circle circle) {
+void Application::AddGameObject(Transform2D transform, Velocity velocity, Circle circle) {
 	_transforms.push_back(transform);
+	_velocities.push_back(velocity);
 	_circles.push_back(circle);
 }
 

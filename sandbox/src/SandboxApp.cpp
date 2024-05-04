@@ -13,7 +13,8 @@ public:
 		glm::u8vec3 circle_color(123, 25, 30);
 
 		Application::AddGameObject(
-			Engine::Transform2D(glm::vec2(100.0f, 100.0f), 0.0f, glm::vec2(1.0f, 1.0f)),
+			Engine::Transform2D(glm::vec2(100.0f, 100.0f), 45.0f, glm::vec2(2.0f, 1.0f)),
+			Engine::Velocity(glm::vec2(10.0f, 10.0f)),
 			Engine::Circle(50.0f, circle_color)
 		);
 	}
